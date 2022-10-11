@@ -44,13 +44,15 @@ while True:
 
     if len(cnts) > 0:
         c= max(cnts, key=cv2.contourArea)
-        ((x,y),radius) = cv2.minEnclosingCircle(c)
+        #((x,y),radius) = cv2.minEnclosingCircle(c)"""
+        x,y,w,h = cv2.boundingRect(c)
         M = cv2.moments(c)
         center = (int(M["m10"] / M["m00"]), int(M["m01"] / M["m00"]))
 
-        if radius > 10:
-            cv2.circle(frame, (int(x), int(y)), int(radius), (0,255,255), 2)
-            cv2.circle(frame, center, 5, (0,0,255), -1)
+        #if radius > 10:
+            #cv2.circle(frame, (int(x), int(y)), int(radius), (0,255,255), 2)
+            #cv2.circle(frame, center, 5, (0,0,255), -1)"""
+        cv2.rectangle(frame,(x,y),(x+w,y+h),(0,255,0),2)
 
     pts.appendleft(center)
 
